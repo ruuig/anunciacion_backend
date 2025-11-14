@@ -1,4 +1,4 @@
-import pg from "pg";
+import pg, { QueryResultRow } from "pg";
 import { loadEnv } from "./env";
 
 const env = loadEnv();
@@ -16,7 +16,7 @@ const pool = env.DATABASE_URL
       ssl
     });
 
-export async function query<T = any>(text: string, params?: any[]): Promise<{ rows: T[] }> {
+export async function query<T extends QueryResultRow = any>(text: string, params?: any[]): Promise<{ rows: T[] }> {
   const res = await pool.query<T>(text, params);
   return { rows: res.rows };
 }

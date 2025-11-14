@@ -45,7 +45,7 @@ export async function getGradeTeachers(req: Request, res: Response, next: NextFu
     const gradeId = parseInt(req.params.gradeId);
     const anoAcademico = req.query.anoAcademico ? parseInt(req.query.anoAcademico as string) : new Date().getFullYear();
     console.log(`Getting teachers for grade ${gradeId}, year ${anoAcademico}`);
-    const teachers = await gradeRepository.getGradeTeachers(gradeId, anoAcademico);
+    const teachers = await gradeRepository.getGradeTeachers(gradeId, String(anoAcademico));
     console.log(`Found ${teachers.length} teachers:`, teachers);
     res.json(teachers);
   } catch (error) {
@@ -67,7 +67,7 @@ export async function getTeacherGrades(req: Request, res: Response, next: NextFu
       return res.status(400).json({ error: "Invalid teacherId" });
     }
     
-    const grades = await gradeRepository.getTeacherGrades(teacherId, anoAcademico);
+    const grades = await gradeRepository.getTeacherGrades(teacherId, String(anoAcademico));
     console.log(`✅ Found ${grades.length} grades for teacher ${teacherId}`);
     
     if (grades.length === 0) {
