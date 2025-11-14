@@ -1,4 +1,4 @@
-# School Backend (sin JWT, password plano)
+# Anunciacion Back end
 
 ## Pasos
 
